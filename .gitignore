@@ -16,9 +16,6 @@
 /vendor/
 /web/bundles/
 
-#/parameters
-app/config/parameters.yml
-app/config/parameters.yml.dist
 #.idea
 .idea/workspace.xml
 .idea/

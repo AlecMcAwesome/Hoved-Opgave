@@ -1,12 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: FrederikPetersen
- * Date: 13/11/2017
- * Time: 11.42
- */
+namespace AppBundle\Entity;
 
-class User
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+class User extends BaseUser
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
 }
