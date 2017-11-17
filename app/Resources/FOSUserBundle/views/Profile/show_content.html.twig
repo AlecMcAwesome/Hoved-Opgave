@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('asset/CSS/Profile.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% endblock %}
 {% block body %}
     <div class="row">
         <div class="container">
@@ -8,6 +13,7 @@
                         <h3>User information:</h3>
                         <p>{{ 'username'|trans }}: {{ user.username }}</p>
                         <p>{{ 'email'|trans }}: {{ user.email }}</p>
+                        <button class="btn btn-success"><span class="glyphicon glyphicon-user" style ="color: white"></span> Edit Profile </button>
                     </div>
                 </div>
 
@@ -19,8 +25,7 @@
                     <h4>Nearest Hospital</h4>
                     <p><b>Rigshospitalet:</b></p>
                     <p>Blegdamsvej 9, 2100 København Ø</p>
-                    <p><b>tlf:</b></p>
-                    <p>12345678</p>
+                    <p><b>tlf:</b> 12345678</p>
                     <img id="rigetImg" src="{{asset('asset/Img/Riget.png') }}" style="width: 310px">
                 </div>
             </div>

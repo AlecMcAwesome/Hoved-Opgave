@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('asset/CSS/Profile.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% endblock %}
 {% block body %}
-    <style>
-        body {
-            background-color: #004161;
-        }
-    </style>
     <body>
 
     <div class="container">

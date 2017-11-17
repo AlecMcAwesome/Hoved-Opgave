@@ -4,9 +4,6 @@
     <meta charset="UTF-8"/>
     <title>Welcome!</title>
     {% block stylesheets %}
-        <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('asset/CSS/Profile.css') }}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     {% endblock %}
 </head>
     <body>
@@ -17,10 +14,10 @@
                 <li id="page2"><a href="{{ path('homepage') }}" style ="color: white">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {% if is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('adminprofile') }}" style ="color: white"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
+                {% elseif is_granted('ROLE_USER') %}
                 <li><a href="{{ path('profilepage') }}" style ="color: white"><span class="glyphicon glyphicon-user" style ="color: white"></span> Profile</a></li>
-                {% elseif is_granted('ROLE_ADMIN') %}
-                    <li><a href="" style ="color: white"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
                 {% else %}
                 <li><a href="{{ path('fos_user_registration_register') }}" style ="color: white"><span class="glyphicon glyphicon-user" style ="color: white"></span> Sign Up</a></li>
                 {% endif %}
@@ -52,6 +49,8 @@
     <script src="{{ asset('asset/Javascript/Base.js') }}"></script>
     </body>
 {% block body %}
+{% endblock %}
+{% block javascript %}
 {% endblock %}
 
 </html>

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <h2><b>Users:</b></h2>
+        <div class="well">
+            <table id="usrTable">
+                <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Edit</th>
+                </thead>
+                <tbody>
+                {% for Users in users %}
+                    <tr id="{{ Users.getId }}">
+                        <td>{{ Users.getuserName }}</td>
+                        <td>{{ Users.getEmail }}</td>
+                        <td>{{ Users.getPassword }}</td>
+                        <td>
+                            <button class="btn btn-primary"> Edit User</button>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('asset/Javascript/Admin.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+{% endblock %}
