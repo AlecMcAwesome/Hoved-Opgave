@@ -1,6 +1,29 @@
-{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="container">
+            <div class="col-xs-4">
+                <div class="well well-userInfo">
+                    <div class="fos_user_user_show">
+                        <h3>User information:</h3>
+                        <p>{{ 'username'|trans }}: {{ user.username }}</p>
+                        <p>{{ 'email'|trans }}: {{ user.email }}</p>
+                    </div>
+                </div>
 
-<div class="fos_user_user_show">
-    <p>{{ 'username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'email'|trans }}: {{ user.email }}</p>
-</div>
+            </div>
+            <div class="col-xs-4">
+            </div>
+            <div class="col-xs-4">
+                <div class="well">
+                    <h4>Nearest Hospital</h4>
+                    <p><b>Rigshospitalet:</b></p>
+                    <p>Blegdamsvej 9, 2100 København Ø</p>
+                    <p><b>tlf:</b></p>
+                    <p>12345678</p>
+                    <img id="rigetImg" src="{{asset('asset/Img/Riget.png') }}" style="width: 310px">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

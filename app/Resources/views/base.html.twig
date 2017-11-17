@@ -5,6 +5,7 @@
     <title>Welcome!</title>
     {% block stylesheets %}
         <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('asset/CSS/Profile.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     {% endblock %}
 </head>
@@ -13,21 +14,21 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li onclick="openNav()"><a href="#"><span class="glyphicon glyphicon-menu-hamburger" style ="color: white"></span></a></li>
-                <li id="page2"><a href="#" style ="color: white">Page 2</a></li>
+                <li id="page2"><a href="{{ path('homepage') }}" style ="color: white">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('ROLE_USER') %}
-                <li><a href=""><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a href="{{ path('profilepage') }}" style ="color: white"><span class="glyphicon glyphicon-user" style ="color: white"></span> Profile</a></li>
                 {% elseif is_granted('ROLE_ADMIN') %}
-                    <li><a href=""><span class="glyphicon glyphicon-user"></span> Admin</a></li>
+                    <li><a href="" style ="color: white"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
                 {% else %}
-                <li><a href="{{ path('fos_user_registration_register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="{{ path('fos_user_registration_register') }}" style ="color: white"><span class="glyphicon glyphicon-user" style ="color: white"></span> Sign Up</a></li>
                 {% endif %}
 
                 {% if is_granted('ROLE_USER') %}
-                    <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}" style ="color: white"><span class="glyphicon glyphicon-log-out" style ="color: white"></span> Logout</a></li>
                 {% else %}
-                    <li><a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}" style ="color: white"><span class="glyphicon glyphicon-log-in" style ="color: white"></span> Login</a></li>
                 {% endif %}
             </ul>
         </div>
