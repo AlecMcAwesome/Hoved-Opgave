@@ -35,14 +35,15 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin-edit/profile/{id}, name="admineditprofile")
+     * @Route("/admin-edit/profile/{id}", name="admineditprofile")
      */
+
     public function editUser(){
 
     }
 
     /**
-     * @Route("/admin-delete/profile/{id}, name="admindeleteprofile")
+     * @Route("/admin-delete/profile/{id}", name="admindeleteprofile")
      */
     public function deleteUser(){
 
