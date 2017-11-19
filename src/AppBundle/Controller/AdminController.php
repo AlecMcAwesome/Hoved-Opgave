@@ -26,4 +26,25 @@ class AdminController extends Controller
             'users' => $users
         ));
     }
+
+    /**
+     * @Route("/admin-add/profile", name="adminaddprofile")
+     */
+    public function addUser(){
+
+    }
+
+    /**
+     * @Route("/admin-edit/profile/{id}, name="admineditprofile")
+     */
+    public function editUser(){
+
+    }
+
+    /**
+     * @Route("/admin-delete/profile/{id}, name="admindeleteprofile")
+     */
+    public function deleteUser(){
+
+    }
 }

@@ -11,7 +11,9 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li onclick="openNav()"><a href="#"><span class="glyphicon glyphicon-menu-hamburger" style ="color: white"></span></a></li>
-                <li id="page2"><a href="{{ path('homepage') }}" style ="color: white">Home</a></li>
+                <li id="home"><a href="{{ path('homepage') }}" style ="color: white">Home</a></li>
+                <li id="tests"><a href="" style ="color: white">PTSD Test</a></li>
+                <li id="about"><a href=""  style ="color: white">About us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('ROLE_ADMIN') %}

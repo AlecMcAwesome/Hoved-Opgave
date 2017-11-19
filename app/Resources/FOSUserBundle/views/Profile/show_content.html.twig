@@ -9,14 +9,32 @@
         <div class="container">
             <div class="col-xs-4">
                 <div class="well well-userInfo">
+                    <img src="http://sanctuarylifestyle.com.au/assets/img/default_avatar.png" class="img-rounded"
+                         alt="Cinque Terre">
                     <div class="fos_user_user_show">
                         <h3>User information:</h3>
                         <p>{{ 'username'|trans }}: {{ user.username }}</p>
                         <p>{{ 'email'|trans }}: {{ user.email }}</p>
-                        <button class="btn btn-success"><span class="glyphicon glyphicon-user" style ="color: white"></span> Edit Profile </button>
+                        <p><b>cpr:</b> 12345668 8374</p>
+                        <a href="{{ path('editprofile') }}">
+                            <button class="btn btn-success">
+                                <span class="glyphicon glyphicon-user" style="color: white"></span> Edit Profile
+                            </button>
+                        </a>
+                        <a href="{{ path('changePassword') }}">
+                            <button class="btn btn-success"><span style="color: white"></span>
+                                Change Password
+                            </button>
+                        </a>
                     </div>
                 </div>
 
+                <div class="well">
+                    <h3>Test results:</h3>
+                    <p>short test describing the ptsd test
+                        this is a placeholder bla bla bla
+                    </p>
+                </div>
             </div>
             <div class="col-xs-4">
             </div>
@@ -26,7 +44,7 @@
                     <p><b>Rigshospitalet:</b></p>
                     <p>Blegdamsvej 9, 2100 København Ø</p>
                     <p><b>tlf:</b> 12345678</p>
-                    <img id="rigetImg" src="{{asset('asset/Img/Riget.png') }}" style="width: 310px">
+                    <img id="rigetImg" src="{{ asset('asset/Img/Riget.png') }}" style="width: 310px">
                 </div>
             </div>
         </div>
