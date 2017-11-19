@@ -45,7 +45,16 @@ class AdminController extends Controller
     /**
      * @Route("/admin-delete/profile/{id}", name="admindeleteprofile")
      */
-    public function deleteUser(){
+    public function deleteUser($id){
 
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')
+                ->findOneBy(['id' => $id]);
+
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('adminprofile');
     }
 }

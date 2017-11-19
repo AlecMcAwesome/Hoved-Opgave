@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block head %}
+    <title>Admin Controller</title>
+{% endblock %}
 {% block stylesheets %}
     <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -6,6 +9,16 @@
 {% endblock %}
 {% block body %}
 
+    <div class="container">
+        <h2>Admin Toolbox:</h2>
+
+        <div class="container well well-toolkit">
+            <div></div>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+        </div>
+    </div>
     <div class="container">
         <h2><b>Users:</b></h2>
         <div class="well">
@@ -15,6 +28,8 @@
                 <th>Email</th>
                 <th>Password</th>
                 <th>Edit</th>
+                <th>Test</th>
+                <th>Delete</th>
                 </thead>
                 <tbody>
                 {% for Users in users %}
@@ -24,6 +39,14 @@
                         <td>{{ Users.getPassword }}</td>
                         <td>
                             <button class="btn btn-primary"> Edit User</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-warning">Reset test</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger"><a
+                                        href="{{ path('admindeleteprofile', {'id': Users.getId}) }}"
+                                        style="color: white">Delete</a></button>
                         </td>
                     </tr>
 
