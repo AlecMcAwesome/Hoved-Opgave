@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+{% endblock %}
+
+{% block body %}
+
+    <div id="adminEditUser" class="container">
+        <div class=" col-xs-4">
+
+            <h3><b>Edit information for: </b>{{ user.getuserName }}</h3>
+            <div class="well">
+
+                <h3><b>Current information:</b></h3>
+                <p><b>Username:</b></p>
+                <p>{{ user.getuserName }}</p>
+                <p><b>Email Address:</b></p>
+                <p>{{ user.getEmail }}</p>
+                <h3><b>New information:</b></h3>
+                {{ form_start(userform) }}
+                <p><b>Username:</b></p>
+                {{ form_row(userform.username) }}
+                <p><b>Email:</b></p>
+                {{ form_row(userform.email) }}
+                {{ form_widget(userform) }}
+                {{ form_end(userform) }}
+
+
+                <h3><b>Reset password:</b></h3>
+                <button class="btn btn-success">Reset Password</button>
+                <h3><b>Change Email:</b></h3>
+                <button class="btn btn-success">Change Email</button>
+
+
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+        </div>
+
+        <div class=" col-xs-4">
+            <h3>Edit ICOE information</h3>
+            <div class="well">
+
+                <h3><b>Current information:</b></h3>
+                <p><b>Contact Person Name:</b></p>
+                {{ icoe.getContactPerson }}
+                <p><b>Contact Person Phone:</b></p>
+                {{ icoe.getCpTelefon }}
+                <p><b>Contact Person E-mail:</b></p>
+                {{ icoe.getCpEmail }}
+                <p><b>Hospial Name:</b></p>
+                {{ icoe.getHospitalName }}
+                <p><b>Hospital Address:</b></p>
+                {{ icoe.getHospitalAddress }}
+                <p><b>Hospital Telephone:</b></p>
+                {{ icoe.getHospitalTlf }}
+                <h3><b>New information:</b></h3>
+                {{ form_start(icoeform) }}
+                <p><b>Contact Person Name:</b></p>
+                {{ form_row(icoeform.contactPerson) }}
+                <p><b> Contact Person Phone: </b></p>
+                {{ form_row(icoeform.cpTelefon) }}
+                <p><b> Contact Person E-mail: </b></p>
+                {{ form_row(icoeform.cpEmail) }}
+                <p></p>
+                <p><b> Hospial Name: </b></p>
+                {{ form_row(icoeform.hospitalName) }}
+                <p><b>Hospital Address: </b></p>
+                {{ form_row(icoeform.hospitalAddress) }}
+                <p><b>Hospital Telephone:</b></p>
+                {{ form_row(icoeform.hospitalTlf) }}
+                {{ form_widget(icoeform) }}
+                {{ form_end(icoeform) }}
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+{% endblock %}

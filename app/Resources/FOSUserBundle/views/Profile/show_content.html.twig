@@ -13,8 +13,8 @@
                          alt="Cinque Terre">
                     <div class="fos_user_user_show">
                         <h3>User information:</h3>
-                        <p>{{ 'username'|trans }}: {{ user.username }}</p>
-                        <p>{{ 'email'|trans }}: {{ user.email }}</p>
+                        <p><b>{{ 'Username'|trans }}:</b> {{ user.username }}</p>
+                        <p><b>{{ 'Email'|trans }}:</b> {{ user.email }}</p>
                         <p><b>cpr:</b> 12345668 8374</p>
                         <a href="{{ path('editprofile') }}">
                             <button class="btn btn-success">
@@ -40,10 +40,11 @@
             </div>
             <div class="col-xs-4">
                 <div class="well">
-                    <h4>Nearest Hospital</h4>
-                    <p><b>Rigshospitalet:</b></p>
-                    <p>Blegdamsvej 9, 2100 København Ø</p>
-                    <p><b>tlf:</b> 12345678</p>
+                    <h4>Hospital Information</h4>
+
+                    <p><b>Hospital Name:</b> {{ icoe.getHospitalName }}</p>
+                    <p><b>Hospital address: </b>{{ icoe.getHospitalAddress }}</p>
+                    <p><b>Telephone: </b>{{ icoe.getHospitalTlf }}</p>
                     <img id="rigetImg" src="{{ asset('asset/Img/Riget.png') }}" style="width: 310px">
                 </div>
             </div>

@@ -1,10 +1,13 @@
+{% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
-
+{% block stylesheets %}
+{% endblock %}
+{% block body %}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
+<form id="login_form" action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
@@ -20,3 +23,6 @@
 
     <input type="submit" id="_submit" name="_submit" value="{{ 'submit'|trans }}" />
 </form>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

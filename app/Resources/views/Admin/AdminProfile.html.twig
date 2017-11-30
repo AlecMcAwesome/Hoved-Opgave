@@ -9,6 +9,7 @@
 {% endblock %}
 {% block body %}
 
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="container">
         <h2>Admin Toolbox:</h2>
 
@@ -38,7 +39,7 @@
                         <td>{{ Users.getEmail }}</td>
                         <td>{{ Users.getPassword }}</td>
                         <td>
-                            <button class="btn btn-primary"> Edit User</button>
+                            <button class="btn btn-primary"><a href="{{ path('admineditprofile', {'id' : Users.getId }) }}" style="color: white">Edit User</a></button>
                         </td>
                         <td>
                             <button type="button" class="btn btn-warning">Reset test</button>
@@ -55,6 +56,9 @@
             </table>
         </div>
     </div>
+        {% else %}
+        <h1>Access Denied!</h1>
+            {% endif %}
 {% endblock %}
 {% block javascript %}
     <script src="{{ asset('asset/Javascript/Admin.js') }}"></script>

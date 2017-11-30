@@ -3,19 +3,35 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\Response;
+use FOS\UserBundle\Controller\ProfileController as BaseController;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
     /**
-     * @Route("/profile", name="profilepage")
+     * @Route("/profile/show", name="profilepage")
      */
 
-    public function indexAction(Response $response)
+    public function showAction()
     {
-        return $this->render('@FOSUser/Profile/show.html.twig');
+
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $userICOE = $em->getRepository('AppBundle:EmergencyEntity')
+            ->findOneBy(['user' => $user->getId()])
+            ;
+        if(!$userICOE) {
+            $this->createNotFoundException('No ICOE data found :( code: 404');
+        }
+        return $this->render('@FOSUser/Profile/show.html.twig', array(
+            'icoe' => $userICOE,
+            'user' => $user
+        ));
     }
 
     /**
