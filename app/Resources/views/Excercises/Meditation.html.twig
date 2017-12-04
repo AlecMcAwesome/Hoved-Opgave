@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Exercises.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="rcorners">
+            <h3>Meditation</h3>
+            <div class="meditationsVideo">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/r6DsOb6-hjQ" frameborder="0"
+                        allowfullscreen></iframe>
+            </div>
+            <p>Lorem Ipsum er ganske enkelt fyldtekst fra print- og typografiindustrien. Lorem Ipsum har været standard
+                fyldtekst siden 1500-tallet, hvor en ukendt trykker sammensatte en tilfældig spalte for at trykke en bog
+                til sammenligning af forskellige skrifttyper. Lorem Ipsum har ikke alene overlevet fem århundreder, men
+                har også vundet indpas i elektronisk typografi uden væsentlige ændringer. Sætningen blev gjordt kendt i
+                1960'erne med lanceringen af Letraset-ark, som indeholdt afsnit med Lorem Ipsum, og senere med
+                layoutprogrammer som Aldus PageMaker, som også indeholdt en udgave af Lorem Ipsum</p>
+        </div>
+    </div>
+{% endblock %}

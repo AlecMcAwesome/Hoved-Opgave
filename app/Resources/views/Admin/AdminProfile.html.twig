@@ -11,16 +11,6 @@
 
     {% if is_granted('ROLE_ADMIN') %}
     <div class="container">
-        <h2>Admin Toolbox:</h2>
-
-        <div class="container well well-toolkit">
-            <div></div>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-        </div>
-    </div>
-    <div class="container">
         <h2><b>Users:</b></h2>
         <div class="well">
             <table id="usrTable">
@@ -50,7 +40,6 @@
                                         style="color: white">Delete</a></button>
                         </td>
                     </tr>
-
                 {% endfor %}
                 </tbody>
             </table>

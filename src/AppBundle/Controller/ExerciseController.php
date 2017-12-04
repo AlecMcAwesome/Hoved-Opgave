@@ -29,4 +29,19 @@ class ExerciseController extends Controller
     public function showSoundsOfNature(){
         return $this->render('Excercises/SoundsOfNatureExercise.html.twig');
     }
+
+    /**
+     * @Route("/exercise/meditation", name="meditation")
+     */
+    public function showMeditation(){
+        return $this->render('Excercises/Meditation.html.twig');
+    }
+
+    /**
+     * @Route("/exercise/breathing", name="breathing")
+     */
+
+    public function showBreathing(){
+        return $this->render('Excercises/BreathingExercise.html.twig');
+    }
 }

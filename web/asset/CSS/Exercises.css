@@ -19,6 +19,15 @@ a:hover, a:visited, a:link, a:active{
     text-decoration:none;
 }
 
+.meditationsVideo{
+    display: flex;
+    justify-content: center;
+}
+
+#breathing{
+    display: flex;
+    justify-content: center;
+}
 h1{
     text-align: center;
 }
