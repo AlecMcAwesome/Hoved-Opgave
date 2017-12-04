@@ -28,6 +28,12 @@ a:hover, a:visited, a:link, a:active{
     display: flex;
     justify-content: center;
 }
+
+.btn-info{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
 h1{
     text-align: center;
 }
