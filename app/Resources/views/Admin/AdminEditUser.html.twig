@@ -46,17 +46,41 @@
 
                 <h3><b>Current information:</b></h3>
                 <p><b>Contact Person Name:</b></p>
+                {% if icoe is null %}
+                <p>No information</p>
+                {% else %}
                 {{ icoe.getContactPerson }}
+                {% endif %}
                 <p><b>Contact Person Phone:</b></p>
+                {% if icoe is null %}
+                <p>No information</p>
+                {% else %}
                 {{ icoe.getCpTelefon }}
+                {% endif %}
                 <p><b>Contact Person E-mail:</b></p>
+                {% if icoe is null %}
+                <p>No information</p>
+                {% else %}
                 {{ icoe.getCpEmail }}
+                {% endif %}
                 <p><b>Hospial Name:</b></p>
+                {% if icoe is null %}
+                <p>No information</p>
+                {% else %}
                 {{ icoe.getHospitalName }}
+                {% endif %}
                 <p><b>Hospital Address:</b></p>
+                {% if icoe is null %}
+                <p>No information</p>
+                {% else %}
                 {{ icoe.getHospitalAddress }}
+                {% endif %}
                 <p><b>Hospital Telephone:</b></p>
+                {% if icoe is null %}
+                <p>No information</p>
+                {% else %}
                 {{ icoe.getHospitalTlf }}
+                {% endif %}
                 <h3><b>New information:</b></h3>
                 {{ form_start(icoeform) }}
                 <p><b>Contact Person Name:</b></p>

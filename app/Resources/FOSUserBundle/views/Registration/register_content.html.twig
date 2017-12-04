@@ -1,11 +1,16 @@
+{% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
-
-<h1>Registration</h1>
-<div id="registraionId" class="container" style="margin-top: 10px">
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-<div>
-    <input class="btn btn-primary" type="submit" value="{{ 'Submit'|trans }}" />
-</div>
-{{ form_end(form) }}
-</div>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/CSS/Register.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>Registration</h1>
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            {{ form_widget(form) }}
+            <div>
+                <input class="btn btn-primary" type="submit" value="{{ 'Submit'|trans }}"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+{% endblock %}

@@ -15,4 +15,18 @@ class ExerciseController extends Controller
     {
         return  $this->render('Excercises/AllExercises.html.twig');
     }
+
+    /**
+     * @Route("/exercises/visualrelax", name="visualRelax")
+     */
+    public function showVisualExercise(){
+        return $this->render('Excercises/VisualRelax.html.twig');
+    }
+
+    /**
+     * @Route("/exercises/soundsofnature", name="soundsofnature")
+     */
+    public function showSoundsOfNature(){
+        return $this->render('Excercises/SoundsOfNatureExercise.html.twig');
+    }
 }
