@@ -21,10 +21,12 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')
             ->findAll();
-
         if(!$users){
             $this->createNotFoundException('No users found :( code: 404');
         }
+
+
+        $exData = $em->getRepository('AppBundle:IntroToExerciseEntity');
 
 
         return $this->render('Admin/AdminProfile.html.twig', array(

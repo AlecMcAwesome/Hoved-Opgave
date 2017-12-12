@@ -28,9 +28,14 @@ class ProfileController extends BaseController
         if(!$userICOE) {
             $this->createNotFoundException('No ICOE data found :( code: 404');
         }
+
+        $diaries = $em->getRepository('AppBundle:DiaryEntity')
+            ->findBy(['userId' => $user->getId()]);
+
         return $this->render('@FOSUser/Profile/show.html.twig', array(
             'icoe' => $userICOE,
-            'user' => $user
+            'user' => $user,
+            'diaries' => $diaries
         ));
     }
 

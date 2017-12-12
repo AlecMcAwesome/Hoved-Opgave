@@ -6,7 +6,12 @@
 {% endblock %}
 
 {% block body %}
-    <div id="breathing" class="col-xs-12">
+    {% if is_granted('ROLE_USER') %}
+        <div id="breathing" class="col-xs-12">
     <iframe src="http://xhalr.com" width="800" height="800" frameborder="0" allowfullscreen style="max-width:100%"></iframe>
     </div>
+    {% else %}
+        <p>you do not have permission to see exercises <a href="{{ path('fos_user_registration_register') }}">Register
+                here</a></p>
+    {% endif %}
 {% endblock %}

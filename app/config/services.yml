@@ -37,3 +37,8 @@ services:
     app.redirect_after_registration:
       class: RedirectAfterRegistration
       autowire: true
+
+      app.form.registration:
+            class: AppBundle\Form\RegistrationFormType
+            tags:
+                - { name: form.type, alias: app_user_registration }

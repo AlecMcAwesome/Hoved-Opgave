@@ -6,48 +6,60 @@
 {% endblock %}
 {% block body %}
     <div class="row">
-        <div class="container">
-            <div class="col-xs-4">
-                <div class="well well-userInfo">
-                    <img src="http://sanctuarylifestyle.com.au/assets/img/default_avatar.png" class="img-rounded"
-                         alt="Cinque Terre">
-                    <div class="fos_user_user_show">
-                        <h3>User information:</h3>
-                        <p><b>{{ 'Username'|trans }}:</b> {{ user.username }}</p>
-                        <p><b>{{ 'Email'|trans }}:</b> {{ user.email }}</p>
-                        <p><b>cpr:</b> 12345668 8374</p>
-                        <a href="{{ path('editprofile') }}">
-                            <button class="btn btn-success">
-                                <span class="glyphicon glyphicon-user" style="color: white"></span> Edit Profile
-                            </button>
-                        </a>
-                        <a href="{{ path('changePassword') }}">
-                            <button class="btn btn-success"><span style="color: white"></span>
-                                Change Password
-                            </button>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="well">
-                    <h3>Test results:</h3>
-                    <p>short test describing the ptsd test
-                        this is a placeholder bla bla bla
-                    </p>
-                </div>
-            </div>
-            <div class="col-xs-4">
-            </div>
-            <div class="col-xs-4">
-                <div class="well">
-                    <h4>Hospital Information</h4>
-
-                    <p><b>Hospital Name:</b> {{ icoe.getHospitalName }}</p>
-                    <p><b>Hospital address: </b>{{ icoe.getHospitalAddress }}</p>
-                    <p><b>Telephone: </b>{{ icoe.getHospitalTlf }}</p>
-                    <img id="rigetImg" src="{{ asset('asset/Img/Riget.png') }}" style="width: 310px">
-                </div>
+    <div class="container">
+    <div class="col-xs-4">
+        <div class="rcorners well-userInfo">
+            <img src="http://sanctuarylifestyle.com.au/assets/img/default_avatar.png" class="img-rounded"
+                 alt="Cinque Terre">
+            <div class="fos_user_user_show">
+                <h3>User information:</h3>
+                <p><b>{{ 'First name: '|trans }}</b> {{ user.firstName }}</p>
+                <p><b>{{ 'Last name: '|trans }}</b>{{ user.lastName }}</p>
+                <p><b>{{ 'Username'|trans }}:</b> {{ user.username }}</p>
+                <p><b>{{ 'Email'|trans }}:</b> {{ user.email }}</p>
+                <p><b>cpr:</b> 12345668 8374</p>
+                <a href="{{ path('editprofile') }}">
+                    <button class="btn btn-success">
+                        <span class="glyphicon glyphicon-user" style="color: white"></span> Edit Profile
+                    </button>
+                </a>
+                <a href="{{ path('changePassword') }}">
+                    <button class="btn btn-success"><span style="color: white"></span>
+                        Change Password
+                    </button>
+                </a>
             </div>
         </div>
+
+        <div class="rcorners">
+            <h3>Test results:</h3>
+            <p>short test describing the ptsd test
+                this is a placeholder bla bla bla
+            </p>
+        </div>
     </div>
-{% endblock %}
+    <div class="col-xs-4">
+        <div class="rcorners">
+            <h4>Diary Entries:</h4>
+            {% for Diaries in diaries %}
+                <p><b>Title:</b> {{ Diaries.getTitle }}</p>
+                <p><b>Created at: </b>{{ Diaries.getCreatedAt|date("m/d/Y") }}</p>
+                <hr>
+            {% endfor %}
+            <a href="{{ path('userDiary', {'userId' : user.getId }) }}"><button class="btn btn-success"><span style="color: white">New Entry</span></button></a>
+        </div>
+    </div>
+    <div class="col-xs-4">
+    <div class="rcorners">
+    <h4>Hospital Information</h4>
+
+        <p><b>Hospital Name:</b>
+        {% if icoe is null %} no information {% else %}{{ icoe.getHospitalName }} {% endif %}</p>
+        <p><b>Hospital address: </b>{% if icoe is null %} no information {% else %}{{ icoe.getHospitalAddress }}{% endif %}</p>
+        <p><b>Telephone: </b>{% if icoe is null %} no information {% else %}{{ icoe.getHospitalTlf }}{% endif %}</p>
+        <img id="rigetImg" src="{{ asset('asset/Img/Riget.png') }}" style="width: 310px">
+        </div>
+        </div>
+        </div>
+        </div>
+        {% endblock %}

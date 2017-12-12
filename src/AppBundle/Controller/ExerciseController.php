@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\IntroToExerciseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -13,18 +14,52 @@ class ExerciseController extends Controller
 
     public function showExercise()
     {
-        return  $this->render('Excercises/AllExercises.html.twig');
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        $exercises = $em->getRepository('AppBundle:IntroToExerciseEntity')
+            ->findAll();
+        if(!$exercises){
+            $this->createNotFoundException('no exercises :(');
+        }
+
+        return  $this->render('Excercises/AllExercises.html.twig', array(
+            'exercises' => $exercises,
+            'userId' => $user
+        ));
     }
 
     /**
-     * @Route("/exercises/visualrelax", name="visualRelax")
+     * @Route("/exercise/toggle/{userId}/", name="toggleExercise")
+     */
+
+    public function toggleExercise($userId){
+        $em = $this->getDoctrine()->getManager();
+
+        $exercise = $em->getRepository('AppBundle:User')
+            ->findOneBy(array('favorites' =>$userId));
+        if(!$exercise){
+            $exercise->addUserFavorite($userId);
+            $this->redirectToRoute('exercises');
+        }elseif ($exercise){
+            $exercise->removeUserFavorite($userId);
+            $this->redirectToRoute('exercises');
+        }else{
+            $this->createNotFoundException('something went wrong :(');
+        }
+
+
+    }
+
+    /**
+     * @Route("/exercise/visualrelax", name="visualRelax")
      */
     public function showVisualExercise(){
         return $this->render('Excercises/VisualRelax.html.twig');
     }
 
     /**
-     * @Route("/exercises/soundsofnature", name="soundsofnature")
+     * @Route("/exercise/soundsofnature", name="soundsofnature")
      */
     public function showSoundsOfNature(){
         return $this->render('Excercises/SoundsOfNatureExercise.html.twig');

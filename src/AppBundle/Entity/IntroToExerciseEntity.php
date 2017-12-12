@@ -8,11 +8,14 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Migrations\Provider\SchemaProviderInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name = "Intro_To_Exercise")
+ * @ORM\Table(name ="intro_To_Exercise")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ExerciseRepository")
  */
 class IntroToExerciseEntity
 {
@@ -21,37 +24,71 @@ class IntroToExerciseEntity
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="favorites")
+     * @ORM\JoinTable(name ="user_Favorite_Exercises")
      */
-    private $user_id;
+    private $userFavorites;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $text;
 
     /**
-     * @return mixed
+     * @ORM\Column(type="string", nullable=true)
      */
-    public function getUserId()
+    private $link;
+
+    private function __construct()
     {
-        return $this->user_id;
+        $this->userFavorites = new ArrayCollection();
+    }
+
+    public function addUserFavorite(User $user)
+    {
+        if (!$this->userFavorites->contains($user)) {
+            $this->userFavorites->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUserFavorite(User $user)
+    {
+        $this->userFavorites->removeElement($user);
+        return $this;
     }
 
     /**
-     * @param mixed $user_id
+     * @return mixed
      */
-    public function setUserId($user_id)
+    public function getId()
     {
-        $this->user_id = $user_id;
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserFavorites()
+    {
+        return $this->userFavorites;
+    }
+
+    /**
+     * @param mixed $userFavorites
+     */
+    public function setUserFavorites($userFavorites)
+    {
+        $this->userFavorites = $userFavorites;
     }
 
     /**
@@ -85,4 +122,22 @@ class IntroToExerciseEntity
     {
         $this->text = $text;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param mixed $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
+
+
 }

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('asset/CSS/Profile.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="rcorners diary">
+            {{ form_start(diaryForm),  }}
+            <h2><b>Title:</b></h2>
+            {{ form_row(diaryForm.title) }}
+            <h2><b>Entry:</b></h2>
+            {{ form_row(diaryForm.text) }}
+            {{ form_widget(diaryForm) }}
+            {{ form_end(diaryForm) }}
+        </div>
+    </div>
+{% endblock %}
