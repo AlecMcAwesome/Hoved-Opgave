@@ -42,7 +42,7 @@ class User extends BaseUser
      * @ORM\Column(type = "string", nullable=true)
      */
     private $lastName;
-    
+
 
     public function __construct()
     {
