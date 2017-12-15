@@ -34,9 +34,12 @@
             <div class="col-xs-4">
                 <div class="rcorners">
                     <h4>Diary Entries:</h4>
+                    <hr>
                     {% for Diaries in diaries %}
                         <p><b>Title:</b> {{ Diaries.getTitle }}</p>
                         <p><b>Created at: </b>{{ Diaries.getCreatedAt|date("m/d/Y") }}</p>
+                        <button type="button" class="btn btn-info">Show</button>
+
                         <hr>
                     {% endfor %}
                     <a href="{{ path('userDiary', {'userId' : user.getId }) }}">
@@ -63,23 +66,27 @@
     </div>
 
     <div class="container">
-        <h2>Test results:</h2>
+        <h3>Test results:</h3>
         <div class="rcorners">
-            <h3>Test results:</h3>
-            <p>short test describing the ptsd test
-                this is a placeholder bla bla bla
-            </p>
+            {% for Tests in tests %}
+                <p>Test taken at (mm/dd/yy): {{ Tests.createdAt|date("m/d/Y") }}</p>
+                <p>Overall Result: {{ Tests.result }}</p>
+            {% endfor %}
+            <a href="{{ path('ptsdtest') }}"><button class="btn btn-success"><span style="color: white">New Test</span></button></a>
         </div>
     </div>
 
     <div class="container">
         <h2>Favorite exercises:</h2>
-            <a href="">
-                <div class="rcorners">
-                    <h2>test</h2>
-                    <p>test</p>
-                </div>
-            </a>
+        {% for userfavorites in user.favorites %}
+            <div class="rcorners">
+                <a href="{{ userfavorites.link }}">
+                    <h4 style="color: white">{{ userfavorites.title }}</h4>
+                    <p style="color: white">{{ userfavorites.text }}</p>
+                </a>
+                <a href="{{ path('profiletoggleofffavorite', {'userId': user.id, 'exId': userfavorites.id }) }}">
+                    <button type="button" class=" btn btn-danger toggleFavorite">Unfavorite</button>
+                </a></div>
+        {% endfor %}
     </div>
-
 {% endblock %}

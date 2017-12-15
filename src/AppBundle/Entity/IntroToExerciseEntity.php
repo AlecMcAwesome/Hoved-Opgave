@@ -37,7 +37,7 @@ class IntroToExerciseEntity
      *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *  })
      */
-    private $userFavorites;
+    private $userfavorites;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -56,20 +56,20 @@ class IntroToExerciseEntity
 
     public function __construct()
     {
-        $this->userFavorites = new ArrayCollection();
+        $this->userfavorites = new ArrayCollection();
     }
 
     public function addUserFavorite(User $user)
     {
-        if($this->userFavorites->contains($user)){
+        if($this->userfavorites->contains($user)){
             return;
         }
-        $this->userFavorites[] = $user;
+        $this->userfavorites[] = $user;
     }
 
     public function removeUserFavorite(User $user)
     {
-        $this->userFavorites->removeElement($user);
+        $this->userfavorites->removeElement($user);
     }
 
     /**
@@ -81,19 +81,19 @@ class IntroToExerciseEntity
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection|User[]
      */
-    public function getUserFavorites()
+    public function getUserfavorites()
     {
-        return $this->userFavorites;
+        return $this->userfavorites;
     }
 
     /**
-     * @param mixed $userFavorites
+     * @param mixed $userfavorites
      */
-    public function setUserFavorites($userFavorites)
+    public function setUserfavorites($userfavorites)
     {
-        $this->userFavorites = $userFavorites;
+        $this->userfavorites = $userfavorites;
     }
 
     /**

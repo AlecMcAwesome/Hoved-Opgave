@@ -3,10 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\IntroToExerciseEntity;
+use AppBundle\Entity\PTSDSurveyEntity;
 use AppBundle\Form\PTSDTestForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends BaseController
@@ -17,57 +19,95 @@ class ProfileController extends BaseController
 
     public function showAction()
     {
-
         $user = $this->getUser();
+
+
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
         $em = $this->getDoctrine()->getManager();
         $userICOE = $em->getRepository('AppBundle:EmergencyEntity')
-            ->findOneBy(['user' => $user->getId()])
-            ;
-        if(!$userICOE) {
+            ->findOneBy(['user' => $user->getId()]);
+        if (!$userICOE) {
             $this->createNotFoundException('No ICOE data found :( code: 404');
         }
 
         $diaries = $em->getRepository('AppBundle:DiaryEntity')
             ->findBy(['userId' => $user->getId()]);
 
+        $exercises = $em->getRepository('AppBundle:IntroToExerciseEntity');
 
+        $tests = $em->getRepository('AppBundle:PTSDSurveyEntity')
+            ->findBy(['user' => $user->getId()]);
 
         return $this->render('@FOSUser/Profile/show.html.twig', array(
             'icoe' => $userICOE,
             'user' => $user,
             'diaries' => $diaries,
+            'exercises' => $exercises,
+            'tests' => $tests
         ));
     }
 
     /**
      * @Route("/profile/edit", name ="editprofile")
      */
-    public function editProfile(){
+    public function editProfile()
+    {
         return $this->render('@FOSUser/Profile/edit_content.html.twig');
     }
 
     /**
      * @Route("/profile/change-password", name="changePassword")
      */
-    public function changePassword (){
+    public function changePassword()
+    {
         return $this->render('@FOSUser/ChangePassword/change_password_content.html.twig');
     }
 
     /**
-     * @Route("/profile/tests/ptsd", name ="ptsdtest")
+     * @Route("/profile/tests/", name ="ptsdtest")
      */
 
-    public function ptsdTest(){
+    public function ptsdTest(Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(PTSDTestForm::class);
+        $survey = new PTSDSurveyEntity();
+        $form = $this->createForm(PTSDTestForm::class, $survey);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $survey->setUser($user);
+            $survey->setResult($survey->getQuestion1() + $survey->getQuestion2() + $survey->getQuestion3() + $survey->getQuestion4());
+            $em->persist($survey);
+            $em->flush();
+            return $this->redirectToRoute('profilepage');
+        }
 
         return $this->render('default/PTSDTest.html.twig', array(
-           'form' => $form->createView()
+            'form' => $form->createView()
         ));
 
+    }
+
+    /**
+     * @Route("profile/exercise/toggle/remove/{userId}/{exId}", name="profiletoggleofffavorite")
+     */
+    public function removeFavorite($userId, $exId)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $exercise = $em->getRepository('AppBundle:IntroToExerciseEntity')
+            ->findOneBy(['id' => $exId]);
+
+        $user = $em->getRepository('AppBundle:User')
+            ->findOneBy(['id' => $userId]);
+
+        $exercise->removeUserFavorite($user);
+        $em->persist($exercise);
+        $em->flush();
+        return $this->redirectToRoute('profilepage');
     }
 }

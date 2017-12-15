@@ -29,7 +29,7 @@ class User extends BaseUser
 
     /**
      * @var \Doctrine\Common\Collections\Collection|IntroToExerciseEntity[]
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\IntroToExerciseEntity", mappedBy="userFavorites")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\IntroToExerciseEntity", mappedBy="userfavorites")
      */
     private $favorites;
 
@@ -88,7 +88,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection|IntroToExerciseEntity[]
      */
     public function getFavorites()
     {
