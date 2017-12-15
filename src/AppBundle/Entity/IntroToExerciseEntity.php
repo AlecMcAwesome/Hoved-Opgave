@@ -27,8 +27,15 @@ class IntroToExerciseEntity
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="favorites")
-     * @ORM\JoinTable(name ="user_Favorite_Exercises")
+     * @var \Doctrine\Common\Collections\Collection|User[]
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="favorites")
+     * @ORM\JoinTable(name ="user_Favorites",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="exercise_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *  })
      */
     private $userFavorites;
 
@@ -47,24 +54,22 @@ class IntroToExerciseEntity
      */
     private $link;
 
-    private function __construct()
+    public function __construct()
     {
         $this->userFavorites = new ArrayCollection();
     }
 
     public function addUserFavorite(User $user)
     {
-        if (!$this->userFavorites->contains($user)) {
-            $this->userFavorites->add($user);
+        if($this->userFavorites->contains($user)){
+            return;
         }
-
-        return $this;
+        $this->userFavorites[] = $user;
     }
 
     public function removeUserFavorite(User $user)
     {
         $this->userFavorites->removeElement($user);
-        return $this;
     }
 
     /**

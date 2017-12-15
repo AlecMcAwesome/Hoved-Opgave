@@ -28,18 +28,23 @@ class User extends BaseUser
     private $diaryId;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\IntroToExerciseEntity", inversedBy="userFavorites")
-     * @ORM\JoinColumn(name="favorites", referencedColumnName="usersFavorite", onDelete ="cascade")
+     * @var \Doctrine\Common\Collections\Collection|IntroToExerciseEntity[]
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\IntroToExerciseEntity", mappedBy="userFavorites")
      */
     private $favorites;
 
     /**
-     * @ORM\Column(type = "string", nullable=true)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PTSDSurveyEntity", mappedBy="user")
+     */
+    private $surveyId;
+
+    /**
+     * @ORM\Column(type = "string", nullable=false)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type = "string", nullable=true)
+     * @ORM\Column(type = "string", nullable=false)
      */
     private $lastName;
 
@@ -82,8 +87,6 @@ class User extends BaseUser
         $this->diaryId = $diaryId;
     }
 
-
-
     /**
      * @return mixed
      */
@@ -116,7 +119,21 @@ class User extends BaseUser
         $this->lastName = $lastName;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSurveyId()
+    {
+        return $this->surveyId;
+    }
 
+    /**
+     * @param mixed $surveyId
+     */
+    public function setSurveyId($surveyId)
+    {
+        $this->surveyId = $surveyId;
+    }
 
 
 }

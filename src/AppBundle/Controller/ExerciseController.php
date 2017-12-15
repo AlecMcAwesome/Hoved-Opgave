@@ -15,6 +15,7 @@ class ExerciseController extends Controller
     public function showExercise()
     {
         $user = $this->getUser();
+        $userid = $this->getUser()->getId();
 
         $em = $this->getDoctrine()->getManager();
         $exercises = $em->getRepository('AppBundle:IntroToExerciseEntity')
@@ -25,30 +26,9 @@ class ExerciseController extends Controller
 
         return  $this->render('Excercises/AllExercises.html.twig', array(
             'exercises' => $exercises,
-            'userId' => $user
+            'user' => $user,
+            'userId' => $userid
         ));
-    }
-
-    /**
-     * @Route("/exercise/toggle/{userId}/", name="toggleExercise")
-     */
-
-    public function toggleExercise($userId){
-        $em = $this->getDoctrine()->getManager();
-
-        $exercise = $em->getRepository('AppBundle:User')
-            ->findOneBy(array('favorites' =>$userId));
-        if(!$exercise){
-            $exercise->addUserFavorite($userId);
-            $this->redirectToRoute('exercises');
-        }elseif ($exercise){
-            $exercise->removeUserFavorite($userId);
-            $this->redirectToRoute('exercises');
-        }else{
-            $this->createNotFoundException('something went wrong :(');
-        }
-
-
     }
 
     /**
@@ -78,5 +58,42 @@ class ExerciseController extends Controller
 
     public function showBreathing(){
         return $this->render('Excercises/BreathingExercise.html.twig');
+    }
+
+    /**
+     * @Route("exercise/toggle/{userId}/{exId}", name ="togglefavorite")
+     */
+    public  function toggleFavorite($userId, $exId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $exercise = $em->getRepository('AppBundle:IntroToExerciseEntity')
+            ->findOneBy(['id' => $exId]);
+
+        $user = $em->getRepository('AppBundle:User')
+            ->findOneBy(['id' => $userId]);
+
+        $exercise->addUserFavorite($user);
+        $em->persist($exercise);
+        $em->flush();
+        return $this->redirectToRoute('exercises');
+    }
+
+    /**
+     * @Route("exercise/toggle/remove/{userId}/{exId}", name="toggleofffavorite")
+     */
+    public function removeFavorite($userId, $exId){
+        $em = $this->getDoctrine()->getManager();
+
+        $exercise = $em->getRepository('AppBundle:IntroToExerciseEntity')
+            ->findOneBy(['id' => $exId]);
+
+        $user = $em->getRepository('AppBundle:User')
+            ->findOneBy(['id' => $userId]);
+
+        $exercise->removeUserFavorite($user);
+        $em->persist($exercise);
+        $em->flush();
+        return $this->redirectToRoute('exercises');
     }
 }

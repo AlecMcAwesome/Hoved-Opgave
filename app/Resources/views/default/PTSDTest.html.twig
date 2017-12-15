@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('asset/CSS/PTSDTest.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% endblock %}
+{% block body %}
+    {% if is_granted('ROLE_USER') %}
+    <h1>PTSD test</h1>
+    <p>her kan du teste dig selv og se om du har svær eller let ptsd</p>
+
+    <div class="col-xs-3"></div>
+    <div class="rcorners col-xs-6">
+        <h4>hvordan har du det ?</h4>
+        <hr>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+    <div class="col-xs-3"></div>
+        {% else %}
+            <p>You need to log in to see this page <a href="{{ path('fos_user_registration_register') }}"> register here</a></p>
+{% endif %}
+{% endblock %}

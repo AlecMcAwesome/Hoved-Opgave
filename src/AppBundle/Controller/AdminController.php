@@ -73,6 +73,10 @@ class AdminController extends Controller
         $icoeForm = $this->createForm(ICOEForm::class, $emergencyInfo);
         $icoeForm->handleRequest($request);
         if ($icoeForm->isSubmitted() && $icoeForm->isValid()){
+            if($icoeData != NULL){
+                $em->remove($icoeData);
+                $em->flush();
+            }
             $emergencyInfo->setUser($user);
             $em->persist($emergencyInfo);
             $em->flush();

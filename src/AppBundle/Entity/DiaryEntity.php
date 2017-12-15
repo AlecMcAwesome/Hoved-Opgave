@@ -25,7 +25,7 @@ class DiaryEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="diaryId")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $userId;
 

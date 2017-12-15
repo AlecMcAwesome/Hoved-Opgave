@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\IntroToExerciseEntity;
+use AppBundle\Form\PTSDTestForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
@@ -32,10 +34,12 @@ class ProfileController extends BaseController
         $diaries = $em->getRepository('AppBundle:DiaryEntity')
             ->findBy(['userId' => $user->getId()]);
 
+
+
         return $this->render('@FOSUser/Profile/show.html.twig', array(
             'icoe' => $userICOE,
             'user' => $user,
-            'diaries' => $diaries
+            'diaries' => $diaries,
         ));
     }
 
@@ -51,5 +55,19 @@ class ProfileController extends BaseController
      */
     public function changePassword (){
         return $this->render('@FOSUser/ChangePassword/change_password_content.html.twig');
+    }
+
+    /**
+     * @Route("/profile/tests/ptsd", name ="ptsdtest")
+     */
+
+    public function ptsdTest(){
+
+        $form = $this->createForm(PTSDTestForm::class);
+
+        return $this->render('default/PTSDTest.html.twig', array(
+           'form' => $form->createView()
+        ));
+
     }
 }

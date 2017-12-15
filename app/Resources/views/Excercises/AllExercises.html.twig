@@ -7,43 +7,35 @@
 {% block body %}
     {% if is_granted('ROLE_USER') %}
 
+        <p class="name" id="{{ userId }}"></p>
         {% for Exercises in exercises %}
             <div class="container">
-                <div class="rcorners">
+                <div class="rcorners" id="{{ Exercises.id }}">
                     <a href="{{ Exercises.getLink }}">
-                        <h1 style="color: white" id="{{ Exercises.id }}" name="{{ Exercises.title }}">{{ Exercises.getTitle }}</h1>
+                        <h1 class="exTitle" style="color: white"
+                            name="{{ Exercises.title }}">{{ Exercises.getTitle }}</h1>
                         <p style="color: white">
                             {{ Exercises.getText }}
                         </p>
                     </a>
-                    <a href="{{ path('toggleExercise', {'userId': userId.getId}) }}"><button type="button" class="showModal btn btn-success">Favorite</button></a>
+
+                    {% if user in Exercises.userFavorites %}
+                        <a href="{{ path('toggleofffavorite', {'userId': userId, 'exId': Exercises.id }) }}">
+                            <button type="button" class=" btn btn-danger toggleFavorite">Unfavorite</button>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('togglefavorite', {'userId': userId, 'exId': Exercises.id }) }}">
+                            <button type="button" class=" btn btn-success toggleFavorite">Favorite</button>
+                        </a>
+                    {% endif %}
+
                 </div>
             </div>
         {% endfor %}
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2 id="modalHeader">Modal Header</h2>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the Modal Body</p>
-                    <p>Some other text...</p>
-                </div>
-                <div class="modal-footer">
-                    <h3>Modal Footer</h3>
-                </div>
-            </div>
-
-        </div>
     {% else %}
         <p>you do not have permission to see exercises <a href="{{ path('fos_user_registration_register') }}">Register
                 here</a></p>
     {% endif %}
 
     <script src="{{ asset('asset/Javascript/Exercises.js') }}"></script>
-    {% endblock %}
+{% endblock %}

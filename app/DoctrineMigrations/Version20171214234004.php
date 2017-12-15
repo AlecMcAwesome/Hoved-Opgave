@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20171210201704 extends AbstractMigration
+class Version20171214234004 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,9 @@ class Version20171210201704 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE Intro_To_Exercise DROP user_favorites, CHANGE title title VARCHAR(255) DEFAULT NULL, CHANGE text text LONGTEXT DEFAULT NULL');
+        $this->addSql('CREATE TABLE user_Favorites (user_id INT NOT NULL, exercise_id INT NOT NULL, INDEX IDX_66786FB2A76ED395 (user_id), INDEX IDX_66786FB2E934951A (exercise_id), PRIMARY KEY(user_id, exercise_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE user_Favorites ADD CONSTRAINT FK_66786FB2A76ED395 FOREIGN KEY (user_id) REFERENCES intro_To_Exercise (id)');
+        $this->addSql('ALTER TABLE user_Favorites ADD CONSTRAINT FK_66786FB2E934951A FOREIGN KEY (exercise_id) REFERENCES user (id)');
     }
 
     /**
@@ -29,6 +31,6 @@ class Version20171210201704 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE intro_To_Exercise ADD user_favorites INT NOT NULL, CHANGE title title VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci, CHANGE text text LONGTEXT NOT NULL COLLATE utf8_unicode_ci');
+        $this->addSql('DROP TABLE user_Favorites');
     }
 }
