@@ -24,27 +24,15 @@ class AdminController extends Controller
         if(!$users){
             $this->createNotFoundException('No users found :( code: 404');
         }
-
-
         $exData = $em->getRepository('AppBundle:IntroToExerciseEntity');
-
-
         return $this->render('Admin/AdminProfile.html.twig', array(
             'users' => $users
         ));
     }
 
     /**
-     * @Route("/admin-add/profile", name="adminaddprofile")
-     */
-    public function addUser(){
-
-    }
-
-    /**
      * @Route("/admin-edit/profile/{id}", name="admineditprofile")
      */
-
     public function editUser(Request $request, $id){
 
         $em = $this->getDoctrine()->getManager();
@@ -53,7 +41,6 @@ class AdminController extends Controller
         if(!$user) {
             $this->createNotFoundException('No users found :( code: 404');
         }
-
         $userForm = $this -> createForm(AdminEditProfileForm::class, $user);
         $userForm -> handleRequest($request);
         if ($userForm->isSubmitted() && $userForm -> isValid()){
@@ -62,7 +49,6 @@ class AdminController extends Controller
 
             return $this->redirectToRoute('adminprofile');
         }
-
         $icoeData = $em->getRepository('AppBundle:EmergencyEntity')
                     ->findOneBy(['user' => $id]);
         if(!$icoeData) {
@@ -83,7 +69,6 @@ class AdminController extends Controller
             return $this->redirectToRoute('adminprofile');
         }
 
-
         return $this->render('Admin/AdminEditUser.html.twig', array(
             'userform' => $userForm->createView(),
             'icoeform' => $icoeForm->createView(),
@@ -103,6 +88,38 @@ class AdminController extends Controller
                 ->findOneBy(['id' => $id]);
 
         $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('adminprofile');
+    }
+
+    /**
+     * @Route("/admin-edit/tests/{id}", name="adminshowtest")
+     */
+    public function showTestAction($id){
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')->findOneBy(['id' => $id]);
+
+        $usertests = $em->getRepository('AppBundle:PTSDSurveyEntity')
+                        ->findBy(['user' => $id]);
+
+        return $this->render(':Admin:AdminViewTest.html.twig', array(
+            'user' => $user,
+            'usertests' => $usertests
+        ));
+    }
+
+    /**
+     * @Route("/admin-delete/tests/{id}", name="admindeletetests")
+     */
+    public function resetTestsAction($id){
+        $em = $this->getDoctrine()->getManager();
+
+        $userTests = $em->getRepository('AppBundle:PTSDSurveyEntity')
+            ->findOneBy(['id' => $id]);
+
+        $em->remove($userTests);
         $em->flush();
 
         return $this->redirectToRoute('adminprofile');

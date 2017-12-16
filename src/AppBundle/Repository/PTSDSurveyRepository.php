@@ -12,8 +12,5 @@ use Doctrine\ORM\EntityRepository;
 
 class PTSDSurveyRepository extends EntityRepository
 {
-    public function findLatestSurvey(){
-        return $this->createQueryBuilder('e')->orderBy('e.createdAt', 'DESC');
-    }
 
 }

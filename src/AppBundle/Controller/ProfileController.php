@@ -69,8 +69,7 @@ class ProfileController extends BaseController
     /**
      * @Route("/profile/tests/", name ="ptsdtest")
      */
-
-    public function ptsdTest(Request $request)
+    public function ptsdTestAction(Request $request)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -83,13 +82,41 @@ class ProfileController extends BaseController
             $survey->setResult($survey->getQuestion1() + $survey->getQuestion2() + $survey->getQuestion3() + $survey->getQuestion4());
             $em->persist($survey);
             $em->flush();
-            return $this->redirectToRoute('profilepage');
+            return $this->redirectToRoute('testresult');
         }
 
         return $this->render('default/PTSDTest.html.twig', array(
             'form' => $form->createView()
         ));
+    }
 
+
+    /**
+     * @Route("/profile/test/result", name="testresult")
+     */
+    public function showresultAction()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('AppBundle:PTSDSurveyEntity')
+            ->findOneBy(['user' => $user], ['id' => 'DESC']);
+
+        if ($test->getResult() < 10) {
+            $exercises = $em->getRepository('AppBundle:IntroToExerciseEntity')
+                ->findOneBy(['title' => 'Meditations Øvelser']);
+
+            return $this->render('default/PTSDResult.html.twig', array(
+                'result' => $test,
+                'exercise' =>$exercises
+            ));
+        } else {
+            $exercise = $em->getRepository('AppBundle:IntroToExerciseEntity')
+                ->findOneBy(['title' => 'Visuel Afslapning']);
+            return $this->render('default/PTSDResult.html.twig', array(
+                'result' => $test,
+                'exercise' => $exercise
+            ));
+        }
     }
 
     /**

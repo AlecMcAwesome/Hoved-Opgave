@@ -5,4 +5,9 @@ $(document).ready(function () {
         bFilter: true
     });
 
+    $('#testTable').dataTable({
+        statesave: true,
+        dom: 'lfrtip',
+        bFilter: true
+    });
 });
