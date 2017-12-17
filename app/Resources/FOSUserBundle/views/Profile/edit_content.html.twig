@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
+{% block stylesheets %}
+{% endblock %}
 
 {% block body %}
-    <div class="container">
+
+    <div class="col-xs-4"></div>
+    <div class="container col-xs-4 rcorners">
         {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
         {{ form_widget(form) }}
         <div>
-            <input class="btn btn-primary" type="submit" value="{{ 'Submit'|trans }}"/>
+            <input class="btn btn-success" type="submit" value="{{ 'Submit'|trans }}"/>
         </div>
     </div>
     {{ form_end(form) }}

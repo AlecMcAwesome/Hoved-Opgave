@@ -16,31 +16,23 @@ class ProfileController extends BaseController
     /**
      * @Route("/profile/show", name="profilepage")
      */
-
     public function showAction()
     {
         $user = $this->getUser();
-
-
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-
         $em = $this->getDoctrine()->getManager();
         $userICOE = $em->getRepository('AppBundle:EmergencyEntity')
             ->findOneBy(['user' => $user->getId()]);
         if (!$userICOE) {
             $this->createNotFoundException('No ICOE data found :( code: 404');
         }
-
         $diaries = $em->getRepository('AppBundle:DiaryEntity')
             ->findBy(['userId' => $user->getId()]);
-
         $exercises = $em->getRepository('AppBundle:IntroToExerciseEntity');
-
         $tests = $em->getRepository('AppBundle:PTSDSurveyEntity')
             ->findBy(['user' => $user->getId()]);
-
         return $this->render('@FOSUser/Profile/show.html.twig', array(
             'icoe' => $userICOE,
             'user' => $user,

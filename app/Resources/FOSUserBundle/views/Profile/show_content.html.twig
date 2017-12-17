@@ -70,7 +70,6 @@
                 <p>Test taken at (mm/dd/yy): {{ Tests.createdAt|date("m/d/Y") }}</p>
                 <p>Overall Result: {{ Tests.result }}</p>
                 <hr>
-                <br>
             {% endfor %}
             <a href="{{ path('ptsdtest') }}"><button class="btn btn-success"><span style="color: white">New Test</span></button></a>
         </div>

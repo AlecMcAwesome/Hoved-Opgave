@@ -30,8 +30,8 @@ class PTSDTestForm extends AbstractType
             ->add('question3', ChoiceType::class, array(
                 'choices' => array(
                     'Ja, meget!' => 5,
-                    'sjældent ' => 3,
-                    'nej, aldrig ' => 2
+                    'sjældent' => 3,
+                    'nej, aldrig' => 2
                 ), 'choices_as_values' => true, 'multiple' => false, 'expanded' => true, 'label' => 'Føler du en intens angst, når noget minder dig om den traumatiske oplevelse? Uanset om det er noget, du tænker på eller noget du ser?'))
             ->add('question4', ChoiceType::class, array(
                 'choices' => array(
