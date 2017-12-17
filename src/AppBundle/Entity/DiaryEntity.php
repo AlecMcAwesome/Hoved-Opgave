@@ -21,7 +21,7 @@ class DiaryEntity
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="diaryId")
@@ -114,8 +114,11 @@ class DiaryEntity
         $this->createdAt = $createdAt;
     }
 
-
-
-
-
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }

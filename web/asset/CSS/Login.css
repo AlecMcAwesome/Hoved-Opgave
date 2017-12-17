@@ -1,3 +1,22 @@
-#login_form{
-    display: inline-block;
+.rcorners {
+    color: white;
+    border-radius: 25px;
+    background: #004161;
+    text-align: center;
+    padding: 20px;
+    width: auto;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+div#form-wrapper {
+    position:absolute;
+    top:50%;
+    right:0;
+    left:0;
+}
+
+input{
+        color: black;
+
 }

@@ -29,7 +29,7 @@ class DiaryController extends Controller
             $diary->setUserId($user);
             $em->persist($diary);
             $em->flush();
-            $this->redirectToRoute('profilepage');
+           return $this->redirectToRoute('profilepage');
         }
 
 

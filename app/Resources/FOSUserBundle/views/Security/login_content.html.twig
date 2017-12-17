@@ -1,28 +1,35 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/CSS/Login.css') }}" rel="stylesheet">
 {% endblock %}
 {% block body %}
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
-
-<form id="login_form" action="{{ path("fos_user_security_check") }}" method="post">
-    {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <label for="username">{{ 'username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    <div class="container">
+        <div class="rcorners"  id="form-wrapper">
+                <form id="login_form" action="{{ path("fos_user_security_check") }}" method="post">
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                    {% endif %}
 
-    <label for="password">{{ 'password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
+                    <label for="username">{{ 'username'|trans }}</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'remember me'|trans }}</label>
+                    <label for="password">{{ 'password'|trans }}</label>
+                    <input type="password" id="password" name="_password" required="required"/>
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'submit'|trans }}" />
-</form>
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                    <label for="remember_me">{{ 'remember me'|trans }}</label>
+
+                    <input class="btn btn-success" type="submit" id="_submit" name="_submit"
+                           value="{{ 'submit'|trans }}"/>
+                </form>
+        </div>
+    </div>
 {% endblock %}
 {% block javascript %}
 {% endblock %}

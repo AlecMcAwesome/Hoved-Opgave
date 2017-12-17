@@ -7,7 +7,7 @@
 {% block body %}
     {% if is_granted('ROLE_USER') %}
 
-        <p class="name" id="{{ userId }}"></p>
+        <p class="name" id="{{ user.getId }}"></p>
         {% for Exercises in exercises %}
             <div class="container">
                 <div class="rcorners" id="{{ Exercises.id }}">
@@ -20,11 +20,11 @@
                     </a>
 
                     {% if user in Exercises.userFavorites %}
-                        <a href="{{ path('toggleofffavorite', {'userId': userId, 'exId': Exercises.id }) }}">
+                        <a href="{{ path('toggleofffavorite', {'userId': user.getId, 'exId': Exercises.id }) }}">
                             <button type="button" class=" btn btn-danger toggleFavorite">Unfavorite</button>
                         </a>
                     {% else %}
-                        <a href="{{ path('togglefavorite', {'userId': userId, 'exId': Exercises.id }) }}">
+                        <a href="{{ path('togglefavorite', {'userId': user.getId, 'exId': Exercises.id }) }}">
                             <button type="button" class=" btn btn-success toggleFavorite">Favorite</button>
                         </a>
                     {% endif %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('asset/CSS/Base.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('asset/CSS/Profile.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div id="{{ diary.id }}" class="diary-entry rcorners">
+            <h2>Title: {{ diary.title }}</h2>
+            <p><b>Entry date: {{ diary.createdAt|date("m/d/Y") }}</b></p>
+            <p>{{ diary.text }}</p>
+            <a href="{{ path('profilepage') }}"><button class="btn btn-success"><span style="color: white">Back to Profile</span></button></a>
+        </div>
+    </div>
+{% endblock %}

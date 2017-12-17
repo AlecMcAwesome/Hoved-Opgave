@@ -8,11 +8,11 @@
     <div class="row">
         <div class="container">
             <div class="col-xs-4">
-                <div class="rcorners well-userInfo">
+                <h3>User information:</h3>
+                <div class="rcorners userInfo">
                     <img src="http://sanctuarylifestyle.com.au/assets/img/default_avatar.png" class="img-rounded"
                          alt="Cinque Terre">
                     <div class="fos_user_user_show">
-                        <h3>User information:</h3>
                         <p><b>{{ 'First name: '|trans }}</b> {{ user.firstName }}</p>
                         <p><b>{{ 'Last name: '|trans }}</b>{{ user.lastName }}</p>
                         <p><b>{{ 'Username'|trans }}:</b> {{ user.username }}</p>
@@ -32,14 +32,13 @@
                 </div>
             </div>
             <div class="col-xs-4">
-                <div class="rcorners">
-                    <h4>Diary Entries:</h4>
+                <h3>Diary Entries:</h3>
+                <div class="diarieEntries rcorners">
                     <hr>
                     {% for Diaries in diaries %}
                         <p><b>Title:</b> {{ Diaries.getTitle }}</p>
                         <p><b>Created at: </b>{{ Diaries.getCreatedAt|date("m/d/Y") }}</p>
-                        <button type="button" class="btn btn-info">Show</button>
-
+                        <a href="{{ path('readDiary', { 'id' : user.getId, 'darId' : Diaries.getId }) }}"><button type="button" class="btn btn-info">Show</button></a>
                         <hr>
                     {% endfor %}
                     <a href="{{ path('userDiary', {'userId' : user.getId }) }}">
@@ -48,9 +47,8 @@
                 </div>
             </div>
             <div class="col-xs-4">
-                <div class="rcorners">
-                    <h4>Hospital Information</h4>
-
+                <h3>Hospital Information</h3>
+                <div class="rcorners icoeInfo">
                     <p><b>Hospital Name:</b>
                         {% if icoe is null %} no information {% else %}{{ icoe.getHospitalName }} {% endif %}</p>
                     <p><b>Hospital

@@ -12,3 +12,22 @@
     width: auto;
     height: auto;
 }
+
+.diary-entry{
+    text-align: center;
+    position: center;
+}
+
+.diarieEntries{
+    height: 520px !important;
+    overflow: scroll;
+}
+
+.userInfo{
+    height: 520px !important;
+
+}
+
+.icoeInfo{
+    height: 520px !important;
+}

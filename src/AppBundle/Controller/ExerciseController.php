@@ -16,7 +16,6 @@ class ExerciseController extends Controller
     public function showExercise()
     {
         $user = $this->getUser();
-        $userid = $this->getUser()->getId();
 
         $em = $this->getDoctrine()->getManager();
         $exercises = $em->getRepository('AppBundle:IntroToExerciseEntity')
@@ -28,7 +27,6 @@ class ExerciseController extends Controller
         return  $this->render('Excercises/AllExercises.html.twig', array(
             'exercises' => $exercises,
             'user' => $user,
-            'userId' => $userid
         ));
     }
 

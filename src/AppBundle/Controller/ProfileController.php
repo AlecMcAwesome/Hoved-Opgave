@@ -90,6 +90,22 @@ class ProfileController extends BaseController
         ));
     }
 
+    /**
+     * @Route("/profile/{id}/diary/{darId}", name="readDiary")
+     */
+    public function readDiary($id, $darId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $diary = $em->getRepository('AppBundle:DiaryEntity')
+            ->findOneBy(['id' => $darId, 'userId' => $id]);
+
+
+
+        return $this->render('default/ReadDiary.html.twig', array(
+            'diary' => $diary
+        ));
+    }
 
     /**
      * @Route("/profile/test/result", name="testresult")
