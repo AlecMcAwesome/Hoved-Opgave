@@ -6,10 +6,10 @@
 {% endblock %}
 {% block body %}
 
-    <h1>{{ result.result }}</h1>
     <div class="container">
-        <div class="rcorners">
-            <a href="{{ exercise.link }}">
+        <h2>Based on our results you should take this exercise to help</h2>
+        <div class="rcorners" >
+            <a href="{{ exercise.link }}" style="color: white">
                 <h2>{{ exercise.title }}</h2>
                 <p>{{ exercise.text }}</p>
             </a>

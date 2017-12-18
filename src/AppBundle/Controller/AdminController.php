@@ -49,10 +49,17 @@ class AdminController extends Controller
 
             return $this->redirectToRoute('adminprofile');
         }
+
         $icoeData = $em->getRepository('AppBundle:EmergencyEntity')
                     ->findOneBy(['user' => $id]);
         if(!$icoeData) {
             $this->createNotFoundException('No ICOE data found :( code: 404');
+        }
+
+        $diaryInfo = $em ->getRepository('AppBundle:DiaryEntity')
+            ->findBy(['userId' => $id]);
+        if(!$diaryInfo) {
+            $this->createNotFoundException('No Diary data found :( code: 404');
         }
 
         $emergencyInfo = new EmergencyEntity();
@@ -73,7 +80,8 @@ class AdminController extends Controller
             'userform' => $userForm->createView(),
             'icoeform' => $icoeForm->createView(),
             'user' => $user,
-            'icoe' => $icoeData
+            'icoe' => $icoeData,
+            'diary' => $diaryInfo
         ));
     }
 

@@ -29,7 +29,7 @@
                         <td>{{ Users.getEmail }}</td>
                         <td>{{ Users.getPassword }}</td>
                         <td>
-                            <button class="btn btn-primary"><a href="{{ path('admineditprofile', {'id' : Users.getId }) }}" style="color: white">Edit User</a></button>
+                            <a href="{{ path('admineditprofile', {'id' : Users.getId }) }}" style="color: white"><button class="btn btn-primary">Edit User</button></a>
                         </td>
                         <td>
                             <a href="{{ path('adminshowtest', {'id' : Users.getId }) }}"><button type="button" class="btn btn-warning">show test result</button></a>

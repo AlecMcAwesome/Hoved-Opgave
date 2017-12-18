@@ -65,7 +65,7 @@
 
     <div class="container">
         <h3>Test results:</h3>
-        <div class="rcorners">
+        <div class="testResults rcorners">
             {% for Tests in tests %}
                 <p>Test taken at (mm/dd/yy): {{ Tests.createdAt|date("m/d/Y") }}</p>
                 <p>Overall Result: {{ Tests.result }}</p>

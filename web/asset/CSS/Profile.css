@@ -31,3 +31,8 @@
 .icoeInfo{
     height: 520px !important;
 }
+
+.testResults{
+    height: 300px !important;
+    overflow: scroll;
+}

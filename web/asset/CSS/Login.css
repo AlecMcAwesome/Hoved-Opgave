@@ -1,22 +1,33 @@
-.rcorners {
+.loginrcorners {
     color: white;
     border-radius: 25px;
     background: #004161;
     text-align: center;
     padding: 20px;
-    width: auto;
+    width: 30%;
     height: auto;
     margin-bottom: 20px;
 }
 
-div#form-wrapper {
-    position:absolute;
-    top:50%;
-    right:0;
-    left:0;
+
+input {
+    color: black ;
 }
 
-input{
-        color: black;
+#login_remember_me{
+    display: block !important;
+    float: right !important;
 
 }
+
+#form-wrapper{
+    display: block;
+    float: left;
+    margin-bottom: 5px;
+    color: white !important;
+}
+
+#login_submit{
+    margin-top: 20px;
+}
+

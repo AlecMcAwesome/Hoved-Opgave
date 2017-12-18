@@ -1,3 +1,26 @@
-#adminEditUser{
-    background-color: #5eb5e0;
+.rcorners {
+    margin-top: 10px;
+    color: white;
+    border-radius: 25px;
+    background: #004161;
+    padding: 20px;
+    width: auto;
+    height: 500px;
+    overflow: scroll;
+}
+
+input {
+    color: black !important;
+}
+
+#app_bundle_admin_edit_profile_form_type_submit {
+    margin-top: 5px;
+}
+
+#icoe_form_submit {
+    margin-top: 5px;
+}
+
+.diary {
+    text-align: center;
 }
