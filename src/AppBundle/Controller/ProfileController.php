@@ -109,17 +109,31 @@ class ProfileController extends BaseController
         $test = $em->getRepository('AppBundle:PTSDSurveyEntity')
             ->findOneBy(['user' => $user], ['id' => 'DESC']);
 
-        if ($test->getResult() < 10) {
+        if ($test->getResult() <= 5) {
             $exercises = $em->getRepository('AppBundle:IntroToExerciseEntity')
-                ->findOneBy(['title' => 'Meditations Øvelser']);
+                ->findOneBy(['title' => 'Meditation Exercises']);
 
             return $this->render('default/PTSDResult.html.twig', array(
                 'result' => $test,
                 'exercise' =>$exercises
             ));
-        } else {
+        } elseif ($test->getResult() > 5 && $test->getResult() <= 10){
             $exercise = $em->getRepository('AppBundle:IntroToExerciseEntity')
-                ->findOneBy(['title' => 'Visuel Afslapning']);
+                ->findOneBy(['title' => 'Visual Relaxation']);
+            return $this->render('default/PTSDResult.html.twig', array(
+                'result' => $test,
+                'exercise' => $exercise
+            ));
+        }elseif($test->getResult() < 10 && $test->getResult() <= 15){
+            $exercise = $em->getRepository('AppBundle:IntroToExerciseEntity')
+                ->findOneBy(['title' => 'Sounds Of Nature']);
+            return $this->render('default/PTSDResult.html.twig', array(
+                'result' => $test,
+                'exercise' => $exercise
+            ));
+        }else{
+            $exercise = $em->getRepository('AppBundle:IntroToExerciseEntity')
+                ->findOneBy(['title' => 'Breathing Exercises']);
             return $this->render('default/PTSDResult.html.twig', array(
                 'result' => $test,
                 'exercise' => $exercise
