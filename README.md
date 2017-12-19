@@ -28,10 +28,24 @@ Installation:
 
 - kør composer update
 
+- inde i projektet kør kommandoen php bin/console doctrine:database:create
+
 - inde i projektet kør kommandoen php bin/console doctrine:schema:create
 
-- indsæt sql dump
+- indsæt sql dump(forklaring længere nede)
 
 - start symfony server med php bin/console server:run
 
 - Enjoy!
+
+Indsæt SQL dump:
+
+- naviger til din phpmyadmin
+
+- tryk på SQL tab
+
+- kopier alt text fra SQL dumpet
+
+- tryk go 
+
+
